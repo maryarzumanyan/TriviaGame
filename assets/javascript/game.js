@@ -2,7 +2,8 @@
 window.onload = function() {
     $("#timer").css({display: "none"});
     $("#done").css({display: "none"});
-
+    var downloadTimer;
+    
     $("#btn-start").on("click", function(){
         $(this).hide();
         updateUI();
@@ -10,7 +11,7 @@ window.onload = function() {
         $("#timer").css({display: "block"});
         //////  create timer
         var timeleft = 31;
-        var downloadTimer = setInterval(function(){
+        downloadTimer = setInterval(function(){
             timeleft--;
             $("#countdowntimer").text(timeleft);
             if(timeleft <= 0)
@@ -22,7 +23,7 @@ window.onload = function() {
     });
 
     $("#container").on("click", "button.btn-lg", function() {
-        $(this).hide();
+        clearInterval(downloadTimer);
         gameOver();
     })
 }
@@ -112,7 +113,6 @@ var trivia =
         } else {
             this.incorrectAnswers ++;
         }
-
         this.unanswered --;
     }
 
